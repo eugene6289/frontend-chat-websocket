@@ -3,8 +3,10 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Login from '../pages/Login.vue';
 import Chat from '../pages/Chat.vue';
 import Home from '../pages/Home.vue';
+import Register from '@/pages/register.vue';
 
 const routes: RouteRecordRaw[] = [
+  { path: '/Register', component: Register },
   { path: '/login', component: Login },
   { path: '/chat', component: Chat, meta: { requiresAuth: true } },
   { path: '/home', component: Home, meta: { requiresAuth: true } },

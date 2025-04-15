@@ -11,6 +11,7 @@
       @keyup.enter="handleLogin"
     />
     <button class="btn" @click="handleLogin">登入</button>
+    <button class="btn" @click="handleRegister">註冊</button>
   </div>
 </template>
 
@@ -32,5 +33,9 @@ const handleLogin = async () => {
   } catch (e: any) {
     alert(e.response?.data?.message || "登入失敗");
   }
+};
+
+const handleRegister = () => {
+  router.push("/register");
 };
 </script>
