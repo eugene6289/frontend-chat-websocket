@@ -46,10 +46,10 @@
 </template>
 
 <script setup lang="ts">
-import BaseButton from './ui/BaseButton.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 import { ref, onMounted } from "vue";
 import socket from "../socket";
-import api from '../api'
+import api from "@/api/index";
 
 const nickname = ref('');
 

@@ -1,8 +1,4 @@
 <!-- src/App.vue -->
 <template>
-  <Chat />
+  <router-view />
 </template>
-
-<script lang="ts" setup>
-import Chat from './components/Chat.vue'
-</script>
