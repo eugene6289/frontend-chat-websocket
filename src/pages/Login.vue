@@ -10,8 +10,8 @@
       class="input"
       @keyup.enter="handleLogin"
     />
-    <button class="btn" @click="handleLogin">登入</button>
-    <button class="btn" @click="handleRegister">註冊</button>
+    <BaseButton class="w-full" @click="handleLogin">登入</BaseButton>
+    <BaseButton class="w-full" @click="handleRegister">註冊</BaseButton>
   </div>
 </template>
 
@@ -19,6 +19,7 @@
 import { ref } from "vue";
 import { login } from "@/api/auth";
 import { useRouter } from "vue-router";
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const email = ref("");
 const password = ref("");

@@ -1,4 +1,5 @@
 <template>
+  <BaseButton @click="$router.push('/Home')"> 首頁 </BaseButton>
   <div class="min-h-screen bg-gray-200 flex items-center justify-center p-4">
     <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6 flex flex-col h-[600px]">
       <h2 class="text-2xl font-bold mb-4 text-center text-blue-700">聊天室</h2>
@@ -57,24 +58,39 @@ const message = ref("");
 const messages = ref<{ user: string; text: string }[]>([]);
 
 onMounted(async () => {
-  // Step 1: 從後端拉歷史訊息
-  const res = await api.get('/messages')
-  messages.value = res.data
+  try {
+    // 🔐 Step 1: 從後端取得使用者資訊
+    const meRes = await api.get('/auth/me');
+    nickname.value = meRes.data.email;
 
-  // Step 2: 接 WebSocket
-  socket.on("your-ip", (ip: string) => {
-    nickname.value = ip;
-  });
+    // 💬 Step 2: 從後端拉歷史訊息
+    const msgRes = await api.get('/messages');
+    messages.value = msgRes.data;
+    
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+    
+    socket.on('message', (data: { user: string; text: string }) => {
+      messages.value.push(data);
+    });
 
-  socket.on("message", (data: { user: string; text: string }) => {
-    messages.value.push(data);
-  });
+  } catch (err: any) {
+    console.error(err);
+    alert('驗證失敗，請重新登入');
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
 });
+
 
 
 const sendMessage = () => {
   if (message.value.trim()) {
-    socket.emit("message", message.value);
+    socket.emit("message", {
+      user: nickname.value,
+      text: message.value,
+    });
     message.value = "";
   }
 };

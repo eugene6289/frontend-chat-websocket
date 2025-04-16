@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Login from '../pages/Login.vue';
 import Chat from '../pages/Chat.vue';
 import Home from '../pages/Home.vue';
-import Register from '@/pages/register.vue';
+import Register from '../pages/Register.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/Register', component: Register },

@@ -12,8 +12,10 @@
       class="input"
     />
 
-    <button @click="handleRegister" class="btn">註冊</button>
-    <p class="text-sm text-gray-500 text-center">已有帳號？去登入</p>
+    <BaseButton @click="handleRegister" class="w-full">註冊</BaseButton>
+    <p class="text-sm text-gray-500 text-center">
+      已有帳號？<BaseButton @click="$router.push('/login')">去登入</BaseButton>
+    </p>
   </div>
 </template>
 
@@ -21,6 +23,7 @@
 import { ref } from "vue";
 import { register } from "@/api/auth";
 import { useRouter } from "vue-router";
+import BaseButton from '@/components/ui/BaseButton.vue'
 
 const email = ref("");
 const password = ref("");
@@ -37,12 +40,3 @@ const handleRegister = async () => {
   }
 };
 </script>
-
-<style scoped>
-.input {
-  @apply w-full p-2 border border-gray-300 rounded-lg;
-}
-.btn {
-  @apply w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition;
-}
-</style>
